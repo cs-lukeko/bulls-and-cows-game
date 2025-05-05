@@ -12,10 +12,13 @@ public class User extends Player {
         while (true) { // Keep prompting the user for code until it is valid
             System.out.println("Please enter your secret code:");
             Code userInput = new Code(Keyboard.readInput());
+            setSecretCode(userInput);
 
-            if (userInput.isValidCode()) {
-                setSecretCode(userInput);
+            if (getSecretCode().isValidCode()) {
                 break;
+            }
+            else {
+                System.out.println(getSecretCode().getErrorString());
             }
         }
     }

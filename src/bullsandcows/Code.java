@@ -3,6 +3,7 @@ package bullsandcows;
 public class Code {
 
     private String code;
+    private String errorString = "";
 
     public Code(String code) {
         this.code = code;
@@ -16,8 +17,25 @@ public class Code {
         this.code = code;
     }
 
+    public String getErrorString() {
+        return errorString;
+    }
+
+    public void setErrorString(String errorString) {
+        this.errorString = errorString;
+    }
+
     // Combines all three code check methods
     public boolean isValidCode() {
+        if (!checkTypeInts()) {
+            setErrorString("Code must consist of integer digits. ");
+        }
+        else if (!checkLength()) {
+            setErrorString("Code must be " + Game.CODE_NUM_DIGITS + " digits long. ");
+        }
+        else if (!checkUnique()) {
+            setErrorString("Code must contain unique digits only. ");
+        }
         return checkTypeInts() && checkLength() && checkUnique();
     }
 
@@ -26,7 +44,6 @@ public class Code {
         if (code.length() == Game.CODE_NUM_DIGITS) {
             return true;
         }
-        System.out.print("Incorrect number of digits. ");
         return false;
     }
 
@@ -37,7 +54,6 @@ public class Code {
             if (c >= '0' && c <= '9' ) {
                 continue;
             } else {
-                System.out.print("Code must consist of integer digits. ");
                 return false;
             }
         }
@@ -50,7 +66,6 @@ public class Code {
         for (int i = 0; i < code.length(); i++) {
             for (int j = 0; j < i; j++) {
                 if (charArray[i] == charArray[j]) {
-                    System.out.print("Digits must be unique. ");
                     return false;
                 }
             }

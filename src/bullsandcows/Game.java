@@ -3,7 +3,7 @@ package bullsandcows;
 /*
 The Game class serves as the main entry point for the Bulls and Cows game. It initialises the game, handles player
 and difficulty setup, then runs the game loop. At the end of the game, the results can be saved to a file. The Game
-class interacts with: GameUtils, Player, User, Computer, AIEasy, AIMedium, Code, and ResultsFile.
+class interacts with: GameUtils, Player, User, Computer, AIEasy, AIMedium, AIHard, Code, and ResultsFile.
 
 Visit my CodeTest.java file for further testing of some of the game's methods.
 
@@ -20,6 +20,8 @@ public class Game {
     public static final int MODE_MULTI = 2;
     public static final int DIFF_EASY = 1;
     public static final int DIFF_MEDIUM = 2;
+    public static final int DIFF_HARD = 3;
+
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -96,6 +98,7 @@ public class Game {
                     System.out.println("---");
                 }
                 else {
+                    System.out.println(user.getGuess().getErrorString());
                     System.out.println("Please try again.");
                 }
             }
@@ -109,12 +112,13 @@ public class Game {
                 try {
                     System.out.println("Which AI difficulty would you like to play against?\n" +
                             "1. Easy\n" +
-                            "2. Medium");
+                            "2. Medium\n" +
+                            "3. Hard");
                     aiDifficulty = GameUtils.selectDifficulty(Keyboard.readInput());
-                    if (aiDifficulty == DIFF_EASY || aiDifficulty == DIFF_MEDIUM) {
+                    if (aiDifficulty == DIFF_EASY || aiDifficulty == DIFF_MEDIUM || aiDifficulty == DIFF_HARD) {
                         break;
                     }
-                    System.out.println("Must select either 1 or 2. Please try again.");
+                    System.out.println("Must select either 1, 2, or 3. Please try again.");
                 }
                 catch (NumberFormatException e) {
                     System.out.println("Please enter an integer. Try again.");
@@ -130,7 +134,7 @@ public class Game {
             user.createSecretCode();
             resultsFile.append("Your secret code was: " + user.getSecretCode());
             computer.createSecretCode();
-            resultsFile.append("Computer's secret code was: " + computer.getSecretCode() + "\n---");
+            resultsFile.append("Computer's secret code was: " + computer.getSecretCode());
             System.out.println();
 
             // Randomise player order
@@ -139,7 +143,8 @@ public class Game {
             // Assign players to currentGuesser or otherPlayer roles
             game:
             while (user.getAttempts() < MAX_ATTEMPTS) {
-                resultsFile.append("Turn " + (user.getAttempts() + 1) + ":");
+                resultsFile.append("---\n" +
+                        "Turn " + (user.getAttempts() + 1) + ":");
                 for (int i = 0; i < players.length; i++) {
                         playerTurn:
                         while (true) {
@@ -169,6 +174,12 @@ public class Game {
                                 int bulls = bullsAndCows[0];
                                 int cows = bullsAndCows[1];
 
+                                // If Hard difficulty, update list of possible guesses
+                                if (currentGuesser instanceof AIHard) {
+                                    AIHard aiHard = (AIHard) currentGuesser; // Cast currentGuesser to AIHard to access its updatePossibleGuesses method
+                                    aiHard.updatePossibleGuesses(currentGuesser.getGuess(), bulls, cows);
+                                }
+
                                 // Print results (formatted nicely) and update resultsFile
                                 System.out.println("Result: " + GameUtils.bullsAndCowsString(bulls, cows));
                                 if (i == 0) { // If first player
@@ -178,19 +189,18 @@ public class Game {
                                     System.out.println("---");
                                 }
                                 resultsFile.append(currentGuesser.getName() + " guessed " + currentGuesser.getGuess() + ", scoring " + GameUtils.bullsAndCowsString(bulls, cows));
-                                if (i == 1) { // If second player
-                                    resultsFile.append("---");
-                                }
 
                                 if (GameUtils.evaluateWinCondition(bulls)) {
                                     if (currentGuesser.getName().equals("You")) {
                                         System.out.println("You win! You guessed the computer's code in " + (currentGuesser.getAttempts() + 1) + " attempts! :)"); // user wins
-                                        resultsFile.append("You won! You guessed the computer's code in " + (currentGuesser.getAttempts() + 1) + " attempts! :)");
+                                        resultsFile.append("---\n" +
+                                                "You won! You guessed the computer's code in " + (currentGuesser.getAttempts() + 1) + " attempts! :)");
                                         break game;
                                     }
                                     else {
                                         System.out.println("Computer wins! It guessed your code in " + (currentGuesser.getAttempts() + 1) + " attempts. :("); // computer wins
-                                        resultsFile.append("Computer won! It guessed your code in " + (currentGuesser.getAttempts() + 1) + " attempts. :(");
+                                        resultsFile.append("---\n" +
+                                                "Computer won! It guessed your code in " + (currentGuesser.getAttempts() + 1) + " attempts. :(");
                                         break game;
                                     }
                                 }
@@ -203,6 +213,7 @@ public class Game {
                                 }
                                 break playerTurn;
                             } else {
+                                System.out.println(currentGuesser.getGuess().getErrorString());
                                 System.out.println("Please try again.");
                             }
                         }
@@ -232,6 +243,10 @@ public class Game {
         else if (difficulty == DIFF_MEDIUM) {
             System.out.println("Medium difficulty selected!\n");
             return new AIMedium();
+        }
+        else if (difficulty == DIFF_HARD) {
+            System.out.println("Hard difficulty selected!\n");
+            return new AIHard();
         }
         else { // if null, choose default difficulty
             System.out.println("Invalid selection: default difficulty will be chosen.\n" +
