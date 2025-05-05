@@ -1,0 +1,34 @@
+Bulls & Cows Game Results:
+
+Your secret code was: 3568
+Computer's secret code was: 7194
+---
+Turn 1:
+You guessed 1234, scoring 1 bull and 1 cow
+Computer guessed 4975, scoring 0 bulls and 1 cow
+---
+Turn 2:
+You guessed 1256, scoring 0 bulls and 1 cow
+Computer guessed 9806, scoring 0 bulls and 2 cows
+---
+Turn 3:
+You guessed 3478, scoring 0 bulls and 2 cows
+Computer guessed 1952, scoring 0 bulls and 1 cow
+---
+Turn 4:
+You guessed 9024, scoring 1 bull and 1 cow
+Computer guessed 7294, scoring 0 bulls and 0 cows
+---
+Turn 5:
+You guessed 9457, scoring 0 bulls and 3 cows
+Computer guessed 9325, scoring 0 bulls and 2 cows
+---
+Turn 6:
+You guessed 9453, scoring 0 bulls and 2 cows
+Computer guessed 7361, scoring 1 bull and 1 cow
+---
+Turn 7:
+You guessed 2457, scoring 0 bulls and 2 cows
+Computer guessed 3925, scoring 1 bull and 1 cow
+---
+It was a draw! Neither player guessed the secret code. :|
