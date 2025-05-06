@@ -31,7 +31,7 @@ public class Code {
             setErrorString("Code must consist of integer digits. ");
         }
         else if (!checkLength()) {
-            setErrorString("Code must be " + Game.CODE_NUM_DIGITS + " digits long. ");
+            setErrorString("Code must be " + Game.codeLength + " digits long. ");
         }
         else if (!checkUnique()) {
             setErrorString("Code must contain unique digits only. ");
@@ -41,7 +41,7 @@ public class Code {
 
     // Checks whether the length of input is correct
     public boolean checkLength() {
-        if (code.length() == Game.CODE_NUM_DIGITS) {
+        if (code.length() == Game.codeLength) {
             return true;
         }
         return false;

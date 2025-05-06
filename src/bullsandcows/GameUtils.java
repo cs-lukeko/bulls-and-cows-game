@@ -11,6 +11,18 @@ public class GameUtils {
         return Integer.parseInt(difficulty);
     }
 
+    public static int selectCodeLengthOption(String length) {
+        if (Integer.parseInt(length) == 1) {
+            return Game.CODE_LENGTH_DEFAULT;
+        }
+        else if (Integer.parseInt(length) == 2) {
+            return Game.CODE_LENGTH_HEXA;
+        }
+        else {
+            return -1;
+        }
+    }
+
     public static void randomisePlayerOrder(Player[] players) {
         if (Math.random() < 0.5) {
             // Swap players
@@ -28,7 +40,7 @@ public class GameUtils {
         char[] guess = playerGuess.getCode().toCharArray();
         char[] secretCode = opponentSecretCode.getCode().toCharArray();
 
-        for (int i = 0; i < Game.CODE_NUM_DIGITS; i++) {
+        for (int i = 0; i < Game.codeLength; i++) {
             if (guess[i] == secretCode[i]) { // If exact match
                 bulls++;
             }
@@ -53,6 +65,6 @@ public class GameUtils {
     }
 
     public static boolean evaluateWinCondition(int bulls) {
-        return bulls == Game.CODE_NUM_DIGITS;
+        return bulls == Game.codeLength;
     }
 }

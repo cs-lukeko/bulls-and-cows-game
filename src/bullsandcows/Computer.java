@@ -8,7 +8,7 @@ public class Computer extends Player {
     }
 
     public Code generateCode() {
-        int[] digits = new int[Game.CODE_NUM_DIGITS];
+        int[] digits = new int[Game.codeLength];
         digits[0] = (int) (Math.random() * 10); // The first number can be any random digit
         for (int i = 1; i < digits.length; i++) { // From second digit onwards, compare uniqueness
             int newDigit = (int) (Math.random() * 10);

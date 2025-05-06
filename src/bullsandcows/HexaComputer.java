@@ -1,6 +1,10 @@
+package bullsandcows;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+// TODO there is a bug on one line of this class. We must correct (don't need to change signature or visibility) the line and document our changes.
 
 public class HexaComputer {
     private List<String> codes;

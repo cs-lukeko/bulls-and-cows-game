@@ -15,13 +15,14 @@ Please enjoy playing my version of the Bulls and Cows game!
 
 public class Game {
     public static final int MAX_ATTEMPTS = 7;
-    public static final int CODE_NUM_DIGITS = 4;
     public static final int MODE_SINGLE = 1;
     public static final int MODE_MULTI = 2;
     public static final int DIFF_EASY = 1;
     public static final int DIFF_MEDIUM = 2;
     public static final int DIFF_HARD = 3;
-
+    public static final int CODE_LENGTH_DEFAULT = 4;
+    public static final int CODE_LENGTH_HEXA = 6;
+    public static int codeLength = CODE_LENGTH_DEFAULT;
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -61,6 +62,24 @@ public class Game {
             System.out.println("Single Player selected!\n");
             Computer computer = new Computer();
             User user = new User();
+            while (true) { // TODO potentially move these blocks to GameUtils - e.g. move this one to selectCodeLengthOption()
+                try {
+                    System.out.println("Which length of code would you like to guess?\n" +
+                            "1. 4-digit code\n" +
+                            "2. 6-digit code");
+                    codeLength = GameUtils.selectCodeLengthOption(Keyboard.readInput());
+                    if (codeLength == CODE_LENGTH_DEFAULT || codeLength == CODE_LENGTH_HEXA) {
+                        System.out.println(codeLength + "-digit code selected!\n");
+                        break;
+                    }
+                    else {
+                        System.out.println("Must select either 1 or 2. Please try again.");
+                    }
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Please enter an integer only. Try again.");
+                }
+            }
 
             // Generate computer's secret code
             computer.createSecretCode();
@@ -228,7 +247,7 @@ public class Game {
     public void printWelcomeMessage() {
         System.out.println("* * * * * * * *\n" +
                 "Welcome to the Bulls And Cows game!\n" +
-                "You have " + MAX_ATTEMPTS + " chances to guess the correct " + CODE_NUM_DIGITS + "-digit code.\n" +
+                "You have " + MAX_ATTEMPTS + " chances to guess the correct " + codeLength + "-digit code.\n" +
                 "A Bull means the correct digit is in the correct location.\n" +
                 "A Cow means the correct digit is in the wrong location.\n" +
                 "Good luck!\n" +

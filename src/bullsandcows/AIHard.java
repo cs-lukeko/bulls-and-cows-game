@@ -30,14 +30,14 @@ public class AIHard extends Computer {
     public void initialisePossibleGuesses() {
         // Get upper limit of possible guesses i.e. 9999 for a 4-digit game
         String upperStr = "";
-        for (int i = 0; i < Game.CODE_NUM_DIGITS; i++) {
+        for (int i = 0; i < Game.codeLength; i++) {
             upperStr += "9";
         }
         int upperInt = Integer.parseInt(upperStr);
 
         List<Code> possibleGuesses = new ArrayList<>();
         for (int i = 0; i < upperInt ; i++) {
-            Code possibleGuess = new Code(String.format("%0" + Game.CODE_NUM_DIGITS + "d", i));
+            Code possibleGuess = new Code(String.format("%0" + Game.codeLength + "d", i));
             if (possibleGuess.isValidCode()) {
                 possibleGuesses.add(possibleGuess);
             }
