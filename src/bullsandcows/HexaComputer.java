@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-// TODO there is a bug on one line of this class. We must correct (don't need to change signature or visibility) the line and document our changes.
-
 public class HexaComputer {
     private List<String> codes;
 
@@ -30,17 +28,20 @@ public class HexaComputer {
     }
 
     private boolean isValidCode(String code) {
-        if (code.length() != 6) {
+        if (code == null || code.isEmpty()) { // Handles null or empty code
+            return false;
+        }
+        if (code.length() != 6) { // Handles invalid length
             return false;
         }
         HashSet<Character> charSet = new HashSet<>();
         for (int i = 0; i < code.length(); i++) {
             char c = code.charAt(i);
-            if (!Character.isLetterOrDigit(c)) {
+            if (!Character.isLetterOrDigit(c)) { // Is alphanumeric
                 return false;
-            } else if ((c < 'a' || c > 'f')) {
+            } else if ((c < 'a' || c > 'f') && (c < '0' || c > '9')) { // Letters are between a and f and numbers between 0 and 9
                 return false;
-            } else if (!charSet.add(c)) {
+            } else if (!charSet.add(c)) { // Is unique
                 return false;
             }
         }
