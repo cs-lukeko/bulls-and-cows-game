@@ -27,28 +27,28 @@ public class TestHexaComputer {
 
     // Test HexaComputer() constructor - throws IllegalArgumentException if codes == null
     @Test
-    public void TestHexaComputerConstructor_NullList() {
+    public void testHexaComputerConstructor_NullList() {
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new HexaComputer(codesNull));
         assertEquals("Codes cannot be empty!", e.getMessage());
     }
 
     // Test HexaComputer() constructor - throws IllegalArgumentException if codes is empty
     @Test
-    public void TestHexaComputerConstructor_EmptyList() {
+    public void testHexaComputerConstructor_EmptyList() {
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new HexaComputer(codesEmpty));
         assertEquals("Codes cannot be empty!", e.getMessage());
     }
 
     // Test HexaComputer() constructor - is not null if HexaComputer is successfully created
     @Test
-    public void TestHexaComputerConstructor_SuccessfulCreation() {
+    public void testHexaComputerConstructor_SuccessfulCreation() {
         hc = new HexaComputer(codesValid);
         assertNotNull(hc);
     }
 
     // Test getCode() - throws IllegalArgumentException when invalid index (index < 0 or index > codes.size())
     @Test
-    public void TestGetCode_InvalidIndex() {
+    public void testGetCode_InvalidIndex() {
         hc = new HexaComputer(codesValid);
         IndexOutOfBoundsException e1 = assertThrows(IndexOutOfBoundsException.class, () -> hc.getCode(-1));
         assertEquals("Invalid index!", e1.getMessage());
@@ -59,7 +59,7 @@ public class TestHexaComputer {
 
     // Test getCode() - returns expected code
     @Test
-    public void TestGetCode_SuccessfulReturn() {
+    public void testGetCode_SuccessfulReturn() {
         assertEquals("face69", codesValid.get(4));
         assertEquals("ab12#$", codesInvalid.get(2));
         assertEquals("1234567", codesMixed.get(1));
@@ -67,14 +67,14 @@ public class TestHexaComputer {
 
     // Test validateCodes() - specifically does not throw an exception when list is populated with valid codes
     @Test
-    public void TestValidateCodes_ValidList() {
+    public void testValidateCodes_ValidList() {
         assertDoesNotThrow(() -> new HexaComputer(codesValid));
     }
 
     // Test validateCodes() and isValidCode() - throws IllegalArgumentException when list is populated with only invalid codes
     // Invalid codes include: invalid length, non-alphanumeric, values outside of 0-9 and a-f, non-unique values, empty string, null
     @Test
-    public void TestValidateCodes_InvalidList() {
+    public void testValidateCodes_InvalidList() {
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new HexaComputer(codesInvalid));
         assertEquals("No valid codes found!", e.getMessage());
     }
@@ -82,7 +82,7 @@ public class TestHexaComputer {
     // Test validateCodes() and isValidCode() - successfully adds valid codes to list and omits invalid codes
     // Invalid codes include: invalid length, non-alphanumeric, values outside of 0-9 and a-f, non-unique values, empty string, null
     @Test
-    public void TestValidateCodes_MixedList() {
+    public void testValidateCodes_MixedList() {
         hc = new HexaComputer(codesMixed);
         for (int i = 0; i < codesValid.size(); i++) { // confirms the validated codesMixed list is equal to codesValid
             assertEquals(codesValid.get(i), hc.getCode(i));
