@@ -1,9 +1,6 @@
 package bullsandcows;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class ResultsFile {
 
@@ -30,11 +27,12 @@ public class ResultsFile {
     public void save(String fileName) {
         File newFile = new File(fileName);
         try (BufferedWriter bW = new BufferedWriter(new FileWriter(newFile))) {
-            for (int i = 0; i < results.length; i++) {
-                bW.write(results[i] + "\n");
+            for (String result : results) {
+                bW.write(result + "\n");
             }
-        }
-        catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
         System.out.println("Successfully saved to " + fileName + "\n");
@@ -54,9 +52,6 @@ public class ResultsFile {
         // Trim spaces and check for illegal characters (e.g. /, \, :, *, ?, \, <, >, |)
         fileName = fileName.trim();
         String illegalChars = "[\\\\/:*?\"<>|]";
-        if (fileName.matches(".*" + illegalChars + ".*")) {
-            return false;
-        }
-        return true;
+        return !fileName.matches(".*" + illegalChars + ".*");
     }
 }

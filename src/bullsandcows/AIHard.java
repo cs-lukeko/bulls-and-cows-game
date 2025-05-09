@@ -12,10 +12,6 @@ public class AIHard extends Computer {
         super();
     }
 
-    public List<Code> getPossibleGuesses() {
-        return possibleGuesses;
-    }
-
     @Override
     public void makeGuess() {
         if (possibleGuesses == null) {
@@ -27,7 +23,7 @@ public class AIHard extends Computer {
         System.out.println();
     }
 
-    public void initialisePossibleGuesses() {
+    private void initialisePossibleGuesses() {
         // Get upper limit of possible guesses i.e. 9999 for a 4-digit game
         String upperStr = "";
         for (int i = 0; i < Game.codeLength; i++) {
@@ -56,7 +52,7 @@ public class AIHard extends Computer {
         }
     }
 
-    public boolean isPossibleGuess(Code currentGuess, int bulls, int cows, Code currentPossibleGuess) {
+    private boolean isPossibleGuess(Code currentGuess, int bulls, int cows, Code currentPossibleGuess) {
         int[] bullsAndCows = GameUtils.calculateBullsAndCows(currentPossibleGuess, currentGuess);
         int possibleBulls = bullsAndCows[0];
         int possibleCows = bullsAndCows[1];

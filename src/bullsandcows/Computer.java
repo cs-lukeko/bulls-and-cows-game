@@ -7,7 +7,7 @@ public class Computer extends Player {
         setName("Computer");
     }
 
-    public Code generateCode() {
+    private Code generateCode() {
         int[] digits = new int[Game.codeLength];
         digits[0] = (int) (Math.random() * 10); // The first number can be any random digit
         for (int i = 1; i < digits.length; i++) { // From second digit onwards, compare uniqueness
@@ -26,7 +26,7 @@ public class Computer extends Player {
         return new Code(codeString);
     }
 
-    public boolean digitIsUnique(int digit, int[] digits, int currentLength) {
+    private boolean digitIsUnique(int digit, int[] digits, int currentLength) {
         for (int i = 0; i < currentLength; i++) {
             if (digits[i] == digit) {
                 return false;

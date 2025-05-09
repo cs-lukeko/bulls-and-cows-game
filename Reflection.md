@@ -16,3 +16,6 @@ if (code == null || code.isEmpty()) {
     return false;
 }
 `
+
+
+The HexaComputer class: I only changed two lines of the class while debugging and testing. I would have liked to change more about the class e.g. make it extend my existing Computer class, or adding a method that returned the total number of valid hex codes, but the Task Five description prohibited this. Also the logic of running a 6-digit code game is all inside my Game class - I think some of this could have been refactored into the HexaComputer class if we were allowed to change the class.

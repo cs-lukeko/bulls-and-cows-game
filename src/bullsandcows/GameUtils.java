@@ -3,11 +3,11 @@ package bullsandcows;
 public class GameUtils {
 // Class that contains static methods that are used throughout the game and do not depend on specific instances of the game.
 
-    public static int selectMode(String mode) {
+    public static int parseGameMode(String mode) {
         return Integer.parseInt(mode);
     }
 
-    public static int selectDifficulty(String difficulty) {
+    public static int parseAIDifficulty(String difficulty) {
         return Integer.parseInt(difficulty);
     }
 

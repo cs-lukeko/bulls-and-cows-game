@@ -27,8 +27,8 @@ public class Code {
 
     // Combines all three code check methods
     public boolean isValidCode() {
-        if (!checkTypeInts()) {
-            setErrorString("Code must consist of integer digits. ");
+        if (!checkValidChars()) {
+            setErrorString("Code contains invalid characters.");
         }
         else if (!checkLength()) {
             setErrorString("Code must be " + Game.codeLength + " digits long. ");
@@ -36,24 +36,19 @@ public class Code {
         else if (!checkUnique()) {
             setErrorString("Code must contain unique digits only. ");
         }
-        return checkTypeInts() && checkLength() && checkUnique();
+        return checkValidChars() && checkLength() && checkUnique();
     }
 
     // Checks whether the length of input is correct
-    public boolean checkLength() {
-        if (code.length() == Game.codeLength) {
-            return true;
-        }
-        return false;
+    private boolean checkLength() {
+        return code.length() == Game.codeLength;
     }
 
     // Checks whether the input is digits (as opposed to e.g., chars)
-    public boolean checkTypeInts() {
+    private boolean checkValidChars() {
         char[] charArray = code.toCharArray();
         for (char c : charArray) {
-            if (c >= '0' && c <= '9' ) {
-                continue;
-            } else {
+            if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'))) {
                 return false;
             }
         }
@@ -61,7 +56,7 @@ public class Code {
     }
 
     // Checks whether the digits are unique
-    public boolean checkUnique() {
+    private boolean checkUnique() {
         char[] charArray = code.toCharArray();
         for (int i = 0; i < code.length(); i++) {
             for (int j = 0; j < i; j++) {
