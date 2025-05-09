@@ -48,8 +48,15 @@ public class Code {
     private boolean checkValidChars() {
         char[] charArray = code.toCharArray();
         for (char c : charArray) {
-            if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'))) {
-                return false;
+            if (Game.hexaCodesEnabled == 0) {
+                if (c < '0' || c > '9') {
+                    return false;
+                }
+            }
+            else if (Game.hexaCodesEnabled == 1) {
+                if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'))) {
+                    return false;
+                }
             }
         }
         return true;
