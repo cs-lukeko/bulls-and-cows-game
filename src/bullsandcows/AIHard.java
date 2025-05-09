@@ -6,7 +6,7 @@ import java.util.List;
 
 public class AIHard extends Computer {
 
-    List<Code> possibleGuesses = null;
+    private List<Code> possibleGuesses = null;
 
     public AIHard() {
         super();

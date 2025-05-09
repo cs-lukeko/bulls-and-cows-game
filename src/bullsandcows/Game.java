@@ -286,7 +286,7 @@ public class Game {
                         Which length of code would you like to guess?
                         1. 4-digit code
                         2. 6-digit code""");
-                codeLength = GameUtils.selectCodeLengthOption(Keyboard.readInput());
+                codeLength = GameUtils.parseCodeLengthSelection(Keyboard.readInput());
                 if (codeLength == CODE_LENGTH_DEFAULT || codeLength == CODE_LENGTH_HEXA) {
                     System.out.println(codeLength + "-digit code selected!\n");
                     break;

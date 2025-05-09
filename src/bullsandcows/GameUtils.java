@@ -11,7 +11,7 @@ public class GameUtils {
         return Integer.parseInt(difficulty);
     }
 
-    public static int selectCodeLengthOption(String length) {
+    public static int parseCodeLengthSelection(String length) {
         if (Integer.parseInt(length) == 1) {
             return Game.CODE_LENGTH_DEFAULT;
         }
