@@ -15,6 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
     - codesMixed contains a mixture of valid codes and invalid codes (in fact, is just codesValid inserted into the middle of codesInvalid)
     - codesEmpty contains an empty list
     - codesNull is not initialised so points to null
+
+ Results when running tests with coverage:
+    - Method - 100%
+    - Line - 100%
+    - Branch - 97%
  */
 
 public class TestHexaComputer {
