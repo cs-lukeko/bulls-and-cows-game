@@ -27,7 +27,7 @@ public class Game {
     public static final int CODE_LENGTH_DEFAULT = 4;
     public static final int CODE_LENGTH_HEXA = 6;
     public static int codeLength = CODE_LENGTH_DEFAULT;
-    public static int hexaCodesEnabled = 0;
+    public static boolean hexaCodesEnabled = false;
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -77,7 +77,7 @@ public class Game {
                     }
 
                     HexaComputer hexaComputer = new HexaComputer(hexaCodes);
-                    hexaCodesEnabled = 1;
+                    hexaCodesEnabled = true;
 
                     // Confirm number of valid hexa codes from hexadecimals.txt
                     int numberOfValidHexaCodes = 0;
